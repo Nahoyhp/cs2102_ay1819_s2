@@ -38,10 +38,13 @@ function initRouter(app) {
 		successRedirect: '/dashboard',
 		failureRedirect: '/'
 	}));
+
+	app.get('/test', passport.authMiddleware(), res.render('test', {}))
 	
 	/* LOGOUT */
 	app.get('/logout', passport.authMiddleware(), logout);
 }
+
 
 
 // Render Function
@@ -60,6 +63,7 @@ function basic(req, res, page, other) {
 	}
 	res.render(page, info);
 }
+
 function query(req, fld) {
 	return req.query[fld] ? req.query[fld] : '';
 }
