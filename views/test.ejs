@@ -1,109 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
-
-		<title>Meeple World</title>
-
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-		<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this template-->
-		<link href="stylesheets/index.css" rel="stylesheet">
+		<!-- Page Title -->
+    <title>CS2102 Database Connect</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+		
+		<!-- CSS for Styling -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		
+		<!-- JavaScript for Interactivity -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </head>
-	<body id="page-top">
-		<%- include navbar.ejs %>
-		
-		<div id="wrapper">
-			<% if(!auth) { %>
-				<%- include loginsidebar.ejs %>
-			<% } else { %>
-				<%- include sidebar.ejs %>
-			<% } %>
-			
-			<div id="content-wrapper">
-				<div class="container-fluid">
-					<div class="card mb-3">
-						<div class="card-header">
-							<i class="fas fa-dice"></i> &nbsp; All Games @ Meeple World
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<thead>
-										<tr>
-											<th>Rank</th>
-											<th>Game Name</th>
-											<th>Rating</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<th colspan="2">Total:</th>
-										<th><i><%= ctx %></i></th>
-									</tfoot>
-									<tbody>
-										<% for(var i=0; i<tbl.length; i++) { %>
-										<tr>
-											<td><%= tbl[i].ranking%></td>
-											<td><%= tbl[i].gamename%></td>
-											<td><%= tbl[i].rating%></td>
-										</tr>
-										<% } %>
-									</tbody>
-								</table>
-							</div>
-							<nav aria-label="...">
-								<ul class="pagination">
-									<% if(p == 1) { %>
-										<li class="page-item">
-											<a class="page-link" href="/" tabindex="-1">First</a>
-										</li>
-										<li class="page-item active">
-											<a class="page-link" href="/?p=1">1 <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="page-item"><a class="page-link" href="/?p=2">2</a></li>
-										<li class="page-item"><a class="page-link" href="/?p=3">3</a></li>
-										<li class="page-item">
-											<a class="page-link" href="/?p=<%= Number(t) %>">Last</a>
-										</li>
-									<% } else if(p == Number(t)) { %>
-										<li class="page-item">
-											<a class="page-link" href="/" tabindex="-1">First</a>
-										</li>
-										<li class="page-item"><a class="page-link" href="/?p=<%= Number(t)-2 %>"><%= Number(t)-2 %></a></li>
-										<li class="page-item"><a class="page-link" href="/?p=<%= Number(t)-1 %>"><%= Number(t)-1 %></a></li>
-										<li class="page-item active">
-											<a class="page-link" href="/?p=<%= Number(t) %>"><%= Number(t) %> <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="/?p=<%= Number(t) %>">Last</a>
-										</li>
-									<% } else { %>
-										<li class="page-item">
-											<a class="page-link" href="/" tabindex="-1">First</a>
-										</li>
-										<li class="page-item"><a class="page-link" href="/?p=<%= Number(p)-1 %>"><%= Number(p)-1 %></a></li>
-										<li class="page-item active">
-											<a class="page-link" href="/?p=<%= Number(p) %>"><%= Number(p) %> <span class="sr-only">(current)</span></a>
-										</li>
-										<li class="page-item"><a class="page-link" href="/?p=<%= Number(p)+1 %>"><%= Number(p)+1 %></a></li>
-										<li class="page-item">
-											<a class="page-link" href="/?p=<%= Number(t) %>">Last</a>
-										</li>
-									<% } %>
-								</ul>
-							</nav>
-						</div>
-						<div class="card-footer small text-muted">CS2102 Database Project</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<%- include bottomscript.ejs %>
+  <body>
+    <h1>CS2102: <%= title%></h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Matric</th>
+					<th scope="col">Name</th>
+					<th scope="col">Faculty</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0; i<data.length; i++) { %>
+				<tr>
+					<td><%= data[i].matric%></td>
+					<td><%= data[i].name%></td>
+					<td><%= data[i].faculty%></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<h3>CODE:</h3>
+		<code class="language-html" data-lang="html">
+		&lt;table class="table"&gt;<br />
+		&nbsp; &nbsp; &nbsp;&lt;thead&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;tr&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;th scope="col"&gt;Matric&lt;/th&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;th scope="col"&gt;Name&lt;/th&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;th scope="col"&gt;Faculty&lt;/th&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;/tr&gt;<br />
+		&nbsp; &nbsp; &nbsp;&lt;/thead&gt;<br />
+		&nbsp; &nbsp; &nbsp;&lt;tbody&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;% for(var i=0; i&lt;data.length; i++) { %&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;tr&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;td&gt;&lt;%= data[i].matric%&gt;&lt;/td&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;td&gt;&lt;%= data[i].name%&gt;&lt;/td&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;td&gt;&lt;%= data[i].faculty%&gt;&lt;/td&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;/tr&gt;<br />
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&lt;% } %&gt;<br />
+		&nbsp; &nbsp; &nbsp;&lt;/tbody&gt;<br />
+		&lt;/table&gt;
+		</code>
   </body>
 </html>

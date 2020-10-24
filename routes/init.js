@@ -65,7 +65,10 @@ function basic(req, res, page, other) {
 }
 
 function testPage(req, res, next) {
-	basic(req, res, 'test', {});
+	var sql_query = 'SELECT * FROM student_info';
+	pool.query(sql_query, (err, data) => {
+		res.render('test', { title: 'Database Connect', data: data.rows });
+	});
 }
 
 function query(req, fld) {
