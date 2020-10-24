@@ -39,7 +39,7 @@ function initRouter(app) {
 		failureRedirect: '/'
 	}));
 
-	app.get('/test', passport.authMiddleware(), res.render('test', {}))
+	app.get('/test', passport.authMiddleware(), testPage)
 	
 	/* LOGOUT */
 	app.get('/logout', passport.authMiddleware(), logout);
@@ -62,6 +62,10 @@ function basic(req, res, page, other) {
 		}
 	}
 	res.render(page, info);
+}
+
+function testPage(req, res, next) {
+	basic(req, res, 'test', {});
 }
 
 function query(req, fld) {
